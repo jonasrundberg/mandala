@@ -12,6 +12,7 @@ const tempCtx = tempCanvas.getContext('2d');
 ctx.globalCompositeOperation = 'source-over';
 // tempCtx.globalCompositeOperation = 'copy';
 const background = document.getElementById('background');
+let  dpi = window.devicePixelRatio;
 
 const cx = Math.round(canvas.width / 2);
 const cy = Math.round(canvas.height / 2);
@@ -22,7 +23,7 @@ const angle = 360 * Math.PI / 180 / sectors; // angle of one sector
 let start = {x:null, y:null};
 let r = Math.min(cx, cy) -40; 
 let mandalaBoundary, pieSliceBoundary, inversePieSliceBoundary;
-
+const backgroundColor = '#eee';
 /**
 - the mandala is devided into sectors that are each of angle arc width
 - one specific sector is defined by "pieSliceBoundary", with its inverse inversePieSliceBoundary
@@ -30,6 +31,7 @@ let mandalaBoundary, pieSliceBoundary, inversePieSliceBoundary;
 - after drawing a flood fill is performed inside pieSliceBoundary
 - this filled sector is theh copied to all other sectors, and horisontally flipped every second copy to achieve symmetry
 */
+
 
 
 
@@ -49,7 +51,7 @@ function reset(){
 
 
     // reset page background color
-    background.style.backgroundColor = '#eee';
+    background.style.backgroundColor = backgroundColor;
 
     // reset mandala background color
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -74,6 +76,10 @@ function reset(){
 
 
 const startDraw = (event) => {
+    if(event.button != 0) {
+        return;
+    }
+
     reset();
     ctx.beginPath();
     ctx.strokeStyle = 'rgba(50, 50, 50, 1.0)';
@@ -102,7 +108,6 @@ const draw = (e) => {
     if (!ctx.isPointInPath(mandalaBoundary, x, y)) {
         return;
     }
-
 
     if (start.x !== null) {
 
@@ -328,6 +333,17 @@ const fillWhites = async () => {
 }
 
 
+const addText = () => {
+    ctx.font = "60px Verdana";
+    ctx.fillStyle = backgroundColor;
+    ctx.textAlign = "center";
+    ctx.fillText("Draw", cx, cy-70);
+    ctx.fillText("Wait", cx, cy);
+    ctx.fillText("Watch", cx, cy+70);
+}
+
+
+
 canvas.addEventListener('mousedown', startDraw);
 canvas.addEventListener('mouseup', endDraw);
 canvas.addEventListener('mousemove', draw);
@@ -338,3 +354,7 @@ canvas.addEventListener("touchmove", draw, false);
 
 
 reset();
+addText();
+
+
+
