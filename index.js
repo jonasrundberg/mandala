@@ -1,3 +1,6 @@
+// https://github.com/jonasrundberg/mandala
+
+
 const canvas = document.getElementById('mandala');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
