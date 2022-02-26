@@ -1,2 +1,3 @@
 # mandala
-Automatic color mandala generator
+
+Generates colorful mandalas from drawing.
