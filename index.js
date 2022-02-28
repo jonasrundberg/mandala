@@ -58,8 +58,8 @@ function reset(){
     ctx.fillStyle = '#fff';
     ctx.fill(mandalaBoundary);
     
-    ctx.resetTransform();
-    tempCtx.resetTransform();
+    // ctx.resetTransform();
+    // tempCtx.resetTransform();
 
 
     // draws the sector guide lines
@@ -80,6 +80,9 @@ const startDraw = (event) => {
         return;
     }
 
+    ctx.resetTransform();
+    tempCtx.resetTransform();
+
     reset();
     ctx.beginPath();
     ctx.strokeStyle = 'rgba(50, 50, 50, 1.0)';
@@ -88,6 +91,9 @@ const startDraw = (event) => {
 
 
 const endDraw = (event) => {
+    
+    ctx.resetTransform();
+    tempCtx.resetTransform();
     isPainting = false;
     start.x = start.y = null;
     let startTime = performance.now()
@@ -290,7 +296,8 @@ function makeColorIterator() {
     const palettes = [ //[new Color('ef476f'), new Color('ffd166'), new Color('06d6a0'), new Color('118ab2') ], // clear colors -good for debug.
                        [new Color('cb997e'), new Color('ddbea9'), new Color('ffe8d6'), new Color('b7b7a4'), new Color('a5a58d'), new Color('6b705c') ], 
                        [new Color('005f73'), new Color('0a9396'), new Color('94d2bd'), new Color('e9d8a6'), new Color('ee9b00'), new Color('ca6702') , new Color('bb3e03'), new Color('ae2012')], 
-                       [new Color('fbf8cc'), new Color('fde4cf'), new Color('ffcfd2'), new Color('f1c0e8'), new Color('cfbaf0'), new Color('a3c4f3') , new Color('90dbf4'), new Color('98f5e1')], 
+                       [new Color('6a040f'), new Color('9d0208'), new Color('d00000'), new Color('dc2f02'), new Color('e85d04'), new Color('f48c06') , new Color('faa307'), new Color('ffba08')], 
+                       [new Color('10451d'), new Color('155d27'), new Color('1a7431'), new Color('208b3a'), new Color('25a244'), new Color('2dc653') , new Color('4ad66d'), new Color('92e6a7')], 
                        [new Color('03045e'), new Color('023e8a'), new Color('0077b6'), new Color('0096c7'), new Color('00b4d8'), new Color('48cae4') , new Color('90e0ef'), new Color('ade8f4')], 
                        [new Color('d8f3dc'), new Color('b7e4c7'), new Color('95d5b2'), new Color('74c69d'), new Color('52b788'), new Color('40916c') , new Color('2d6a4f'), new Color('1b4332')], 
                     ] ;
